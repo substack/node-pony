@@ -2,9 +2,23 @@ var smtp = require('smtp-protocol');
 var seq = require('seq');
 var Request = require('./lib/request');
 
-module.exports = function (params, cb) {
-    var finished = false;
+module.exports = function pony (params, cb) {
+    if (cb === undefined) {
+        // curry the parameters
+        return function (params_, cb_) {
+            if (typeof params_ === 'function') {
+                cb_ = params_;
+                params_ = {};
+            }
+            Object.keys(params_).forEach(function (key) {
+                params[key] = params_[key];
+            });
+            
+            return pony(params, cb_);
+        };
+    }
     
+    var finished = false;
     var c = smtp.connect(params.host, params.port, function (mail) {
         seq()
             .seq(function () {
