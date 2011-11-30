@@ -16,7 +16,7 @@ test('send ok', function (t) {
             stream.on('end', function () {
                 t.equal(data, [
                     'content-type: text/plain',
-                    'subject: greetings',
+                    'subject: greetings applicant',
                     '',
                     'Your application has been accepted.',
                     ''
@@ -49,7 +49,7 @@ function sendMessage (t, port) {
         if (err) t.fail(err)
         else {
             req.setHeader('content-type', 'text/plain');
-            req.setHeader('subject', 'greetings');
+            req.setHeader('subject', 'greetings applicant');
             req.end('Your application has been accepted.');
         }
     });
