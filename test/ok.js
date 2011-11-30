@@ -23,12 +23,12 @@ test('send ok', function (t) {
                 ].join('\r\n'));
             });
             
-            stream.on('quit', function () {
-                t.end();
-                server.close();
-            });
-            
             ack.accept();
+        });
+        
+        req.on('quit', function () {
+            t.end();
+            server.close();
         });
     });
     
