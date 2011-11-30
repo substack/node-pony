@@ -1,0 +1,40 @@
+{
+    "name" : "send",
+    "description" : "Send email.",
+    "version" : "0.0.0",
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/substack/node-send.git"
+    },
+    "main" : "index.js",
+    "keywords" : [
+        "email",
+        "mail",
+        "smtp",
+        "client"
+    ],
+    "directories" : {
+        "lib" : ".",
+        "example" : "example",
+        "test" : "test"
+    },
+    "scripts" : {
+        "test" : "tap test/*.js"
+    },
+    "dependencies" : {
+        "smtp-protocol" : "0.1.x",
+        "seq" : "0.3.x"
+    },
+    "devDependencies" : {
+        "tap" : "0.0.x"
+    },
+    "engines" : {
+        "node" : ">=0.4.0"
+    },
+    "license" : "MIT",
+    "author" : {
+        "name" : "James Halliday",
+        "email" : "mail@substack.net",
+        "url" : "http://substack.net"
+    }
+}
