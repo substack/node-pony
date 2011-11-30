@@ -3,7 +3,7 @@ var test = require('tap').test;
 var pony = require('../');
 
 test('send reject', function (t) {
-    t.plan(2);
+    t.plan(3);
     var port = Math.floor(Math.random() * 5e4 + 1e4);
     
     var server = smtp.createServer(function (req) {
@@ -32,10 +32,10 @@ function sendMessage (t, server, port) {
     
     pony(opts, function (err, req) {
         if (err) {
-            //t.equal(err, 'FROM not ok: 553: ACCESS DENIED');
-            console.log('err=' + err);
-            //t.end();
-            //server.close();
+            t.equal(err.code, 553);
+            t.equal(err.message, 'FROM not ok: ACCESS DENIED');
+            t.end();
+            server.close();
         }
         else t.fail('should have blown up')
     });

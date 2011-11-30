@@ -20,50 +20,57 @@ module.exports = function pony (params, cb) {
     
     var finished = false;
     var c = smtp.connect(params.host, params.port, function (mail) {
+        
+        function error (msg, code, lines) {
+            var s = msg + ': ' + lines.join(' ');
+            var err = new Error(s);
+            err.code = code;
+            err.lines = lines;
+            err.message = s;
+            cb(err);
+            
+            finished = true;
+            mail.quit();
+        }
+        
         seq()
             .seq(function () {
                 mail.on('greeting', this.ok);
             })
             .seq(function (code, lines) {
                 if (!(code >= 200 && code < 300)) {
-                    cb('greeting code not ok: '
-                        + code + ': ' + lines.join(' ')
-                    );
-                    mail.quit();
+                    error('greeting code not ok', code, lines);
                 }
                 else mail.helo(params.domain || 'localhost', this);
             })
             .seq(function (code, lines) {
                 if (!(code >= 200 && code < 300)) {
-                    cb('HELO not ok: ' + code + ': ' + lines.join(' '));
-                    mail.quit();
+                    error('HELO not ok', code, lines);
                 }
                 else mail.from(params.from, this);
             })
             .seq(function (code, lines) {
                 if (!(code >= 200 && code < 300)) {
-                    cb('FROM not ok: ' + code + ': ' + lines.join(' '));
-                    mail.quit();
+                    error('FROM not ok', code, lines);
                 }
                 else mail.to(params.to, this);
             })
             .seq(function (code, lines) {
                 if (!(code >= 200 && code < 300)) {
-                    cb('TO not ok: ' + code + ': ' + lines.join(' '));
-                    mail.quit();
+                    error('TO not ok', code, lines);
                 }
                 else mail.data(this);
             })
             .seq_(function (next, code, latest) {
                 if (code != 354) {
-                    cb('DATA not ok: ' + code + ': ' + lines.join(' '));
-                    mail.quit();
+                    error('DATA not ok', code, lines);
                 }
                 else {
                     var req = new Request;
                     mail.message(req, function (err, code, lines) {
                         if (err) {
                             cb(err);
+                            finished = true;
                             mail.quit();
                         }
                         else if (!(code >= 200 && code < 300)) {
@@ -79,6 +86,7 @@ module.exports = function pony (params, cb) {
             })
             .catch(function (err) {
                 cb(err);
+                finished = true;
                 mail.quit();
             })
             .seq(function () {
