@@ -1,4 +1,4 @@
-var send = require('../');
+var pony = require('../');
 
 var opts = {
     host : 'localhost',
@@ -7,7 +7,7 @@ var opts = {
     to : 'root',
 };
 
-send(opts, function (err, req) {
+pony(opts, function (err, req) {
     if (err) console.error(err)
     else {
         req.setHeader('content-type', 'text/plain');

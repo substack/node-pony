@@ -1,4 +1,6 @@
-var send = require('../')({
+var pony = require('../');
+
+var send = pony({
     host : 'localhost',
     port : 25,
     from : 'substack',
