@@ -1,4 +1,4 @@
-var pony = require('../');
+var pony = require('pony');
 
 var send = pony({
     host : 'localhost',
