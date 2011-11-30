@@ -1,10 +1,10 @@
 {
-    "name" : "send",
+    "name" : "pony",
     "description" : "Send email.",
     "version" : "0.0.0",
     "repository" : {
         "type" : "git",
-        "url" : "git://github.com/substack/node-send.git"
+        "url" : "git://github.com/substack/node-pony.git"
     },
     "main" : "index.js",
     "keywords" : [
