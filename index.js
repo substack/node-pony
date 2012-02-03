@@ -61,7 +61,7 @@ module.exports = function pony (params, cb) {
                 }
                 else mail.data(this);
             })
-            .seq_(function (next, code, latest) {
+            .seq_(function (next, code, lines) {
                 if (code != 354) {
                     error('DATA not ok', code, lines);
                 }
