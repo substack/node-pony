@@ -3,6 +3,8 @@ pony
 
 Send email and a pony.
 
+[![build status](https://secure.travis-ci.org/substack/node-pony.png)](http://travis-ci.org/substack/node-pony)
+
 ![pony](http://substack.net/images/pony.png)
 
 example
