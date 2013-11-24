@@ -8,10 +8,9 @@ var opts = {
 };
 
 pony(opts, function (err, req) {
-    if (err) console.error(err)
-    else {
-        req.setHeader('content-type', 'text/plain');
-        req.setHeader('subject', 'greetings');
-        req.end('oh hello');
-    }
+    if (err) return console.error(err)
+    
+    req.setHeader('content-type', 'text/plain');
+    req.setHeader('subject', 'greetings');
+    req.end('oh hello');
 });

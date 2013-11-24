@@ -33,28 +33,6 @@ pony(opts, function (err, req) {
 });
 ```
 
-or you can curry the options for later
---------------------------------------
-
-``` js
-var pony = require('pony');
-
-var send = pony({
-    host : 'localhost',
-    port : 25,
-    from : 'substack',
-});
-
-send({ to : 'root' }, function (err, req) {
-    if (err) console.error(err)
-    else {
-        req.setHeader('content-type', 'text/plain');
-        req.setHeader('subject', 'protip');
-        req.end('curry is tasty');
-    }
-});
-```
-
 methods
 =======
 
@@ -69,9 +47,6 @@ Send an email with some parameters `params`.
 
 If you specify a callback `cb(err, req)` the message will be sent and you'll get
 a request object.
-
-If you don't specify a callback, `pony()` returns a new version of the pony
-function with the `params` merged in as default options.
 
 request object
 --------------
