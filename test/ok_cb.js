@@ -45,8 +45,12 @@ function sendMessage (t, port) {
         to : 'doctor@horrible.net',
     };
     
-    var r = pony(opts);
-    r.setHeader('content-type', 'text/plain');
-    r.setHeader('subject', 'greetings applicant');
-    r.end('Your application has been accepted.');
+    pony(opts, function (err, req) {
+        if (err) t.fail(err)
+        else {
+            req.setHeader('content-type', 'text/plain');
+            req.setHeader('subject', 'greetings applicant');
+            req.end('Your application has been accepted.');
+        }
+    });
 }
