@@ -4,6 +4,10 @@ var Request = require('./lib/request');
 module.exports = function pony (params, cb) {
     var mail, finished = false;
     
+    if (!cb) cb = function (err) {
+        if (err) req.emit('error', err);
+    }
+    
     cb = (function (cb_) {
         return function () {
             cb = function () {};
@@ -31,7 +35,8 @@ module.exports = function pony (params, cb) {
         if (!finished) cb('connection terminated early');
     });
     
-    return c;
+    var req = new Request;
+    return req;
     
     function error (msg, code, lines) {
         var s = msg + ': ' + lines.join(' ');
@@ -69,7 +74,6 @@ module.exports = function pony (params, cb) {
         if (code != 354) {
             return error('DATA not ok', code, lines);
         }
-        var req = new Request;
         mail.message(req, function (err, code, lines) {
             finished = true;
             
