@@ -1,5 +1,4 @@
-pony
-====
+# pony
 
 Send email and a pony.
 
@@ -7,11 +6,7 @@ Send email and a pony.
 
 ![pony](http://substack.net/images/pony.png)
 
-example
-=======
-
-send an email with some options
--------------------------------
+# example
 
 ``` js
 var pony = require('pony');
@@ -33,53 +28,45 @@ pony(opts, function (err, req) {
 });
 ```
 
-methods
-=======
+# methods
 
 ``` js
 var pony = require('pony')
 ```
 
-pony(params, cb)
-----------------
+## var req = pony(params, cb)
 
 Send an email with some parameters `params`.
 
 If you specify a callback `cb(err, req)` the message will be sent and you'll get
 a request object.
 
-request object
---------------
+## request object
 
 The request object is a stream that behaves like the `req` you get from
 `http.createServer()`.
 
 SMTP messages are a lot like is HTTP messages is why.
 
-req.setHeader(key, value)
--------------------------
+## req.setHeader(key, value)
 
 Use `setHeader()` to set the `'content-type'`, `'subject'`, and such things
 relevant to emails.
 
-req.removeHeader(key)
----------------------
+## req.removeHeader(key)
 
 Remove a header.
 
-req.write(data)
----------------
+## req.write(data)
 
 Write a string or Buffer to the message body after the headers.
 
-req.end(data)
--------------
+## req.end(data)
 
 End the message body, optionally writing an additional Buffer or string `data`
 first.
 
-install
-=======
+# install
 
 With [npm](http://npmjs.org) do:
 
@@ -87,25 +74,20 @@ With [npm](http://npmjs.org) do:
 npm install pony
 ```
 
-tests
-=====
+# tests
 
-So many tests. Run them with `npm test`.
+With [npm](https://npmjs.org) do:
 
-todo
-====
+```
+npm test
+```
 
-* authentication
-* ssl
-
-pony comics
-===========
+# pony comics
 
 [more shetland pony adventures](http://harkavagrant.com/index.php?id=131)
 
 [pony returns](http://www.harkavagrant.com/index.php?id=284)
 
-license
-=======
+# license
 
-MIT/X11
+MIT
