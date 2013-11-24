@@ -23,7 +23,6 @@
     },
     "dependencies" : {
         "smtp-protocol" : "~0.4.1",
-        "seq" : "0.3.x",
         "inherits": "~2.0.1",
         "readable-stream": "~1.1.9"
     },
