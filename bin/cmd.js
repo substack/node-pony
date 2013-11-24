@@ -2,6 +2,7 @@
 
 var pony = require('../');
 var minimist = require('minimist');
+var copy = require('copy');
 var os = require('os');
 var fs = require('fs');
 
@@ -26,7 +27,7 @@ if (argv.help || process.argv.length === 2) {
     return;
 }
 
-var addrTo = argv._.concat(argv.to);
+var addrTo = argv._.concat(argv.to).filter(Boolean);
 
 if (addrTo.length === 0) {
     console.error('pony requires at least one message recipient)');
@@ -34,7 +35,9 @@ if (addrTo.length === 0) {
 }
 
 addrTo.forEach(function (to) {
-    var req = pony(argv);
+    var opts = copy(argv);
+    opts.to = to;
+    var req = pony(opts);
     if (argv.subject) req.setHeader('subject', argv.subject);
     if (argv.cc) req.setHeader('cc', toArray(argv.cc).join(', '));
     
