@@ -1,16 +1,11 @@
-var pony = require('pony');
+var pony = require('../');
 
-var opts = {
+var mail = pony({
     host : 'localhost',
     port : 25,
     from : 'substack',
     to : 'root',
-};
-
-pony(opts, function (err, req) {
-    if (err) return console.error(err)
-    
-    req.setHeader('content-type', 'text/plain');
-    req.setHeader('subject', 'greetings');
-    req.end('oh hello');
 });
+mail.setHeader('content-type', 'text/plain');
+mail.setHeader('subject', 'greetings');
+mail.end('oh hello');

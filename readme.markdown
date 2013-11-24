@@ -11,21 +11,15 @@ Send email and a pony.
 ``` js
 var pony = require('pony');
 
-var opts = {
+var mail = pony({
     host : 'localhost',
     port : 25,
     from : 'substack',
     to : 'root',
-};
-
-pony(opts, function (err, req) {
-    if (err) console.error(err)
-    else {
-        req.setHeader('content-type', 'text/plain');
-        req.setHeader('subject', 'greetings');
-        req.end('oh hello');
-    }
 });
+mail.setHeader('content-type', 'text/plain');
+mail.setHeader('subject', 'greetings');
+mail.end('oh hello');
 ```
 
 # methods
@@ -38,8 +32,8 @@ var pony = require('pony')
 
 Send an email with some parameters `params`.
 
-If you specify a callback `cb(err, req)` the message will be sent and you'll get
-a request object.
+An optional callback `cb(err, req)` will fire once the initial handshake is
+complete.
 
 ## request object
 
