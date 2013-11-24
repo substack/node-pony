@@ -22,11 +22,13 @@
         "test" : "tap test/*.js"
     },
     "dependencies" : {
-        "smtp-protocol" : "0.1.x",
-        "seq" : "0.3.x"
+        "smtp-protocol" : "~0.4.1",
+        "seq" : "0.3.x",
+        "inherits": "~2.0.1",
+        "readable-stream": "~1.1.9"
     },
     "devDependencies" : {
-        "tap" : "0.0.x"
+        "tap" : "~0.4.4"
     },
     "engines" : {
         "node" : ">=0.4.0"
