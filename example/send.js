@@ -4,7 +4,7 @@ var mail = pony({
     host : 'localhost',
     port : 25,
     from : 'substack',
-    to : 'root',
+    to : 'root'
 });
 mail.setHeader('content-type', 'text/plain');
 mail.setHeader('subject', 'greetings');

@@ -3,12 +3,13 @@
 var pony = require('../');
 var minimist = require('minimist');
 var os = require('os');
+var fs = require('fs');
 
 var argv = minimist(process.argv.slice(2), {
     default: {
         host: 'localhost',
         port: 25,
-        from: process.env.USER + '@' + os.hostname()
+        from: process.env.EMAIL || (process.env.USER + '@' + os.hostname())
     },
     alias: {
         host: 'h',
@@ -20,12 +21,19 @@ var argv = minimist(process.argv.slice(2), {
     }
 });
 
-if (!argv.to) {
-    console.error('pony requires at least one message recipient (--to)');
+if (argv.help || process.argv.length === 2) {
+    fs.createReadStream(__dirname + '/usage.txt').pipe(process.stdout);
+    return;
+}
+
+var addrTo = argv._.concat(argv.to);
+
+if (addrTo.length === 0) {
+    console.error('pony requires at least one message recipient)');
     process.exit(1);
 }
 
-toArray(argv.to).forEach(function (to) {
+addrTo.forEach(function (to) {
     var req = pony(argv);
     if (argv.subject) req.setHeader('subject', argv.subject);
     if (argv.cc) req.setHeader('cc', toArray(argv.cc).join(', '));

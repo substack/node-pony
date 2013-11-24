@@ -1,0 +1,20 @@
+usage: pony {OPTIONS} [EMAIL ADDRESSES...]
+
+  Send an email to each EMAIL ADDRESS.
+  The message body is read from stdin.
+
+  OPTIONS are:
+
+    -s, --subject  Set the subject header.
+
+    -H, --header   Set an arbitrary header as a `KEY: VALUE` string.
+ 
+    -f, --from     Message from this user.
+                   Default: $EMAIL || $USER@$HOSTNAME
+
+    -h, --host     Connect to a host address. Default: localhost.
+
+    -p, --port     Use this port for the connection. Default: 25.
+
+    -t, --to       Another way to set EMAIL ADDRESS receipients.
+
