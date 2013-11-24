@@ -7,6 +7,9 @@
     "url" : "git://github.com/substack/node-pony.git"
   },
   "main" : "index.js",
+  "bin": {
+    "pony": "bin/cmd.js"
+  },
   "keywords" : [
     "email",
     "mail",
@@ -24,7 +27,8 @@
   "dependencies" : {
     "smtp-protocol" : "~0.4.1",
     "inherits": "~2.0.1",
-    "readable-stream": "~1.1.9"
+    "readable-stream": "~1.1.9",
+    "minimist": "~0.0.5"
   },
   "devDependencies" : {
     "tap" : "~0.4.4"
